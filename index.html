@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEDGE Ventures | Systematic Equity Trading & Investment Management</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+
+    .nav-bar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e5e5;
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0a1f44;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #4a5568;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #0a1f44;
+    }
+
+    .hero {
+      margin-top: 70px;
+      background: linear-gradient(135deg, #0a1f44 0%, #1a3a6e 100%);
+      color: white;
+      padding: 8rem 2rem 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" x="50" y="50" fill="white" opacity="0.1"/></svg>') repeat;
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 300;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 3rem auto 0;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .section {
+      padding: 6rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #0a1f44;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: #6b7280;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: #f9fafb;
+      padding: 2.5rem;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #0a1f44 0%, #1a3a6e 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .feature-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+    }
+
+    .feature-desc {
+      color: #6b7280;
+      line-height: 1.7;
+    }
+
+    .strategy-section {
+      background: #f9fafb;
+    }
+
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .strategy-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .strategy-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .strategy-badge {
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, #0a1f44 0%, #1a3a6e 100%);
+      color: white;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .strategy-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .strategy-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      background: #f9fafb;
+      border-radius: 12px;
+    }
+
+    .metric {
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0a1f44;
+    }
+
+    .metric-label {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-top: 0.3rem;
+    }
+
+    .strategy-list {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .strategy-list li {
+      padding: 0.75rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: #4a5568;
+    }
+
+    .strategy-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: 700;
+    }
+
+    .technology-section {
+      background: linear-gradient(135deg, #0a1f44 0%, #1a3a6e 100%);
+      color: white;
+    }
+
+    .technology-section .section-title {
+      color: white;
+    }
+
+    .technology-section .section-subtitle {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .tech-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .tech-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .tech-list {
+      list-style: none;
+    }
+
+    .tech-list li {
+      padding: 0.6rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      opacity: 0.9;
+    }
+
+    .tech-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      opacity: 0.7;
+    }
+
+    .team-section {
+      background: white;
+    }
+
+    .team-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .team-description {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #4a5568;
+      margin-bottom: 3rem;
+    }
+
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .expertise-item {
+      padding: 1.5rem;
+      background: #f9fafb;
+      border-radius: 12px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .contact-section {
+      background: #f9fafb;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1100px;
+      margin: 3rem auto 0;
+    }
+
+    .contact-info {
+      background: white;
+      padding: 3rem;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .contact-item {
+      margin-bottom: 2rem;
+    }
+
+    .contact-label {
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-value {
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    .contact-value a {
+      color: #0a1f44;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-value a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      background: #0a1f44;
+      color: white;
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .disclaimer {
+      max-width: 900px;
+      margin: 2rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 0.85rem;
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .section {
+        padding: 4rem 1.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav-bar">
+    <div class="nav-container">
+      <div class="logo">SEDGE VENTURES</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#strategy">Strategy</a>
+        <a href="#approach">Approach</a>
+        <a href="#technology">Technology</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Systematic Equity Investment Management</h1>
+      <p>Delivering consistent, risk-adjusted returns through disciplined execution, quantitative research, and institutional-grade technology</p>
+     
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">$1M+</div>
+          <div class="stat-label">Assets Under Management</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">20-30%</div>
+          <div class="stat-label">Annual Return Target</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">&lt;15%</div>
+          <div class="stat-label">Maximum Drawdown</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">24/7</div>
+          <div class="stat-label">Market Monitoring</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="section-header">
+      <h2 class="section-title">About SEDGE Ventures</h2>
+      <p class="section-subtitle">An independent trading and investment firm leveraging technology, research, and disciplined risk management to navigate US equity markets</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">01</div>
+        <h3 class="feature-title">Systematic Approach</h3>
+        <p class="feature-desc">Quantitative screening frameworks combining fundamental analysis with technical indicators to identify high-probability opportunities across market conditions.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">02</div>
+        <h3 class="feature-title">Risk-First Philosophy</h3>
+        <p class="feature-desc">Rigorous position sizing, Value-at-Risk monitoring, and portfolio-level loss limits ensure capital preservation through all market cycles.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">03</div>
+        <h3 class="feature-title">Technology-Driven Edge</h3>
+        <p class="feature-desc">Proprietary analytics tools, AI-powered screeners, and real-time risk dashboards provide institutional-quality decision support.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">04</div>
+        <h3 class="feature-title">Disciplined Execution</h3>
+        <p class="feature-desc">Every trade is documented, reviewed, and measured against predefined criteria. Emotions are eliminated through systematic protocols.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">05</div>
+        <h3 class="feature-title">Continuous Research</h3>
+        <p class="feature-desc">Daily monitoring of earnings releases, sector trends, macroeconomic indicators, and global market catalysts informs our investment decisions.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">06</div>
+        <h3 class="feature-title">Performance Accountability</h3>
+        <p class="feature-desc">Comprehensive reporting includes risk-adjusted returns, benchmark comparisons, and detailed attribution analysis across all strategies.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="strategy" class="section strategy-section">
+    <div class="section-header">
+      <h2 class="section-title">Investment Strategy</h2>
+      <p class="section-subtitle">A dual-approach framework combining tactical swing trading with strategic long-term investing</p>
+    </div>
+
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <div class="strategy-header">
+          <div class="strategy-badge">60% Allocation</div>
+          <h3 class="strategy-title">Swing Trading</h3>
+        </div>
+       
+        <div class="strategy-metrics">
+          <div class="metric">
+            <div class="metric-value">2-30</div>
+            <div class="metric-label">Day Horizon</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$25K</div>
+            <div class="metric-label">Max Position</div>
+          </div>
+        </div>
+
+        <p class="feature-desc">Capturing short-term mispricings and momentum opportunities through technical analysis and systematic entry protocols.</p>
+
+        <ul class="strategy-list">
+          <li>RSI oversold conditions (&lt;30)</li>
+          <li>Volume spike confirmation (2x average)</li>
+          <li>Scaled entry with defined stop-loss</li>
+          <li>Profit targets at 20% and 30% gains</li>
+          <li>Maximum 12 concurrent positions</li>
+        </ul>
+      </div>
+
+      <div class="strategy-card">
+        <div class="strategy-header">
+          <div class="strategy-badge">40% Allocation</div>
+          <h3 class="strategy-title">Long-Term Investment</h3>
+        </div>
+       
+        <div class="strategy-metrics">
+          <div class="metric">
+            <div class="metric-value">6-36</div>
+            <div class="metric-label">Month Horizon</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$50K</div>
+            <div class="metric-label">Max Position</div>
+          </div>
+        </div>
+
+        <p class="feature-desc">Building concentrated positions in fundamentally strong companies with sustainable competitive advantages and growth potential.</p>
+
+        <ul class="strategy-list">
+          <li>Net profit margin ≥18% for healthy companies</li>
+          <li>Revenue growth &gt;20% for growth plays</li>
+          <li>Dollar-cost averaging entry strategy</li>
+          <li>Quarterly rebalancing discipline</li>
+          <li>Focus on innovation-driven sectors</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="approach" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Target Sectors</h2>
+      <p class="section-subtitle">Focusing on high-growth sectors driven by technological innovation and structural trends</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">AI</div>
+        <h3 class="feature-title">Artificial Intelligence</h3>
+        <p class="feature-desc">Machine learning, generative AI, and enterprise automation platforms transforming industries.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔬</div>
+        <h3 class="feature-title">Healthcare & Biotech</h3>
+        <p class="feature-desc">Drug discovery, gene therapy, and innovative treatment modalities with breakthrough potential.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💻</div>
+        <h3 class="feature-title">Semiconductors</h3>
+        <p class="feature-desc">Chipmakers and equipment manufacturers enabling next-generation computing infrastructure.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3 class="feature-title">Cybersecurity</h3>
+        <p class="feature-desc">Cloud security, identity management, and threat intelligence protecting digital infrastructure.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">Clean Energy</h3>
+        <p class="feature-desc">Battery technology, renewable energy, and grid modernization driving the energy transition.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3 class="feature-title">Space & Aerospace</h3>
+        <p class="feature-desc">Commercial space, satellite technology, and defense contractors with innovative capabilities.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="technology" class="section technology-section">
+    <div class="section-header">
+      <h2 class="section-title">Technology Infrastructure</h2>
+      <p class="section-subtitle">Institutional-grade systems providing real-time analytics, risk management, and execution capabilities</p>
+    </div>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <h3 class="tech-title">Trading Platforms</h3>
+        <ul class="tech-list">
+          <li>Interactive Brokers TWS professional suite</li>
+          <li>Real-time market data feeds</li>
+          <li>Advanced order types and algorithms</li>
+          <li>Multi-asset execution capabilities</li>
+        </ul>
+      </div>
+
+      <div class="tech-card">
+        <h3 class="tech-title">Analytics & Research</h3>
+        <ul class="tech-list">
+          <li>AI-powered stock screening engines</li>
+          <li>Custom fundamental analysis dashboards</li>
+          <li>Technical indicator automation</li>
+          <li>Earnings and catalyst monitoring</li>
+        </ul>
+      </div>
+
+      <div class="tech-card">
+        <h3 class="tech-title">Risk Management</h3>
+        <ul class="tech-list">
+          <li>Real-time Value-at-Risk calculation</li>
+          <li>Position sizing and correlation analysis</li>
+          <li>Automated stop-loss management</li>
+          <li>Portfolio exposure monitoring</li>
+        </ul>
+      </div>
+
+      <div class="tech-card">
+        <h3 class="tech-title">Performance Tracking</h3>
+        <ul class="tech-list">
+          <li>Automated trade journal and logging</li>
+          <li>P&L attribution and analysis</li>
+          <li>Benchmark performance comparison</li>
+          <li>Risk-adjusted return metrics</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="team" class="section team-section">
+    <div class="section-header">
+      <h2 class="section-title">Our Team</h2>
+      <p class="section-subtitle">Combining financial expertise with technological innovation</p>
+    </div>
+
+    <div class="team-content">
+      <p class="team-description">
+        SEDGE Ventures is part of the Solverminds Group, a technology company with proven expertise in building enterprise applications, optimization algorithms, and AI solutions across maritime, clinical research, and financial technology sectors. Our team brings together equity analysts, quantitative traders, risk managers, and software engineers united by a common mission: delivering superior risk-adjusted returns through the intersection of finance and technology.
+      </p>
+
+      <div class="expertise-grid">
+        <div class="expertise-item">Equity Analysis</div>
+        <div class="expertise-item">Quantitative Research</div>
+        <div class="expertise-item">Risk Management</div>
+        <div class="expertise-item">Software Engineering</div>
+        <div class="expertise-item">Machine Learning</div>
+        <div class="expertise-item">Portfolio Management</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact-section">
+    <div class="section-header">
+      <h2 class="section-title">Contact Us</h2>
+      <p class="section-subtitle">Get in touch to learn more about our investment approach</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">
+            <a href="mailto:info@sedgeventures.ae">info@sedgeventures.ae</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-label">Location</div>
+          <div class="contact-value">
+            SEDGE Ventures FZ-LLC<br>
+            SO-15, Shed no-18, TP Al Hamra Freezone<br>
+            Al Hamra Industrial Freezone<br>
+            Ras Al Khaimah, United Arab Emirates
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-label">Global Presence</div>
+          <div class="contact-value">
+            Dubai, UAE • Chennai, India • Singapore • Atlanta, USA • Hamburg, Germany
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-label">Trading Focus</div>
+          <div class="contact-value">
+            US Equity Markets (NYSE, NASDAQ, AMEX)<br>
+            Operating hours: 5:30 PM - 12:00 AM GST
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-label">Investment Minimum</div>
+          <div class="contact-value">
+            Please contact us to discuss partnership opportunities and minimum investment requirements.
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-label">Reporting</div>
+          <div class="contact-value">
+            Daily position updates, weekly performance reports, monthly comprehensive analysis with risk metrics
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 SEDGE Ventures FZ-LLC. All Rights Reserved.</p>
+      <p style="margin-top: 0.5rem; opacity: 0.8;">Part of the Solverminds Group</p>
+     
+      <div class="disclaimer">
+        <strong>Important Disclosure:</strong> Trading equities and financial instruments involves substantial risk of loss and is not suitable for all investors. Past performance is not indicative of future results. This website is for informational purposes only and does not constitute investment advice, an offer to sell, or a solicitation to buy any securities. Any investment decisions should be made only after consulting with qualified financial advisors and conducting thorough due diligence. SEDGE Ventures is a proprietary trading firm and does not currently manage external capital. Performance figures represent internal trading results and have not been independently audited.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
